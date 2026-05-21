@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Merch Ops HQ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{--bg:#06060b;--s1:#0e0e16;--s2:#14141e;--s3:#1c1c2a;--bdr:#252538;--t1:#ededf4;--t2:#8585a0;--t3:#5c5c78;--acc:#7c6aef;--acc2:#9d8df7;--red:#f04444;--rbg:rgba(240,68,68,.1);--ora:#efa32d;--obg:rgba(239,163,45,.1);--grn:#34d27b;--gbg:rgba(52,210,123,.1);--blu:#4d8ef7;--bbg:rgba(77,142,247,.1);--pur:#a855f7;--pbg:rgba(168,85,247,.1);--tab:66px;--stat:42px}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;background:#000;font-family:'DM Sans',system-ui,sans-serif;color:var(--t1)}
+#lock{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .35s,transform .35s}
+#lock.off{opacity:0;pointer-events:none;transform:scale(1.04)}
+#lock .gl{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--acc),#c084fc);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:22px}
+#lock h1{font-size:19px;font-weight:800;letter-spacing:-.4px}
+#lock p{font-size:12px;color:var(--t2);margin-top:4px;margin-bottom:26px}
+#lock input{width:250px;padding:13px 16px;border-radius:13px;background:var(--s2);border:1.5px solid var(--bdr);color:var(--t1);font-size:14px;font-family:inherit;text-align:center;outline:none;transition:border .2s}
+#lock input:focus{border-color:var(--acc)}
+#lock input.err{border-color:var(--red);animation:shake .35s}
+#lock .sub{font-size:10px;color:var(--t3);margin-top:12px}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.frame{display:none}
+@media(min-width:481px){body{display:flex;align-items:center;justify-content:center;background:#050509}.frame{display:block;position:relative;width:390px;height:844px;border-radius:44px;border:2.5px solid #28283a;box-shadow:0 0 0 1px rgba(255,255,255,.03),0 40px 100px rgba(0,0,0,.55),0 0 60px rgba(124,106,239,.06);overflow:hidden;background:var(--bg)}.frame::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:126px;height:33px;background:#000;border-radius:0 0 18px 18px;z-index:100}#app{width:100%;height:100%}}
+#app{position:relative;width:100vw;height:100vh;background:var(--bg);overflow:hidden;display:flex;flex-direction:column}
+@media(min-width:481px){#app{width:100%;height:100%}}
+.sbar{height:var(--stat);padding:0 22px;display:flex;align-items:center;justify-content:space-between;font-size:12.5px;font-weight:600;flex-shrink:0;z-index:50}
+.sbar .clk{font-variant-numeric:tabular-nums}
+.sbar .r{display:flex;gap:5px;font-size:10px;color:var(--t2)}
+.hdr{padding:2px 18px 10px;flex-shrink:0}
+.hdr .brand{display:flex;align-items:center;gap:8px}
+.hdr .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--grn);box-shadow:0 0 8px rgba(52,210,123,.4)}
+.hdr h1{font-size:20px;font-weight:800;letter-spacing:-.4px}
+.hdr .sub{font-size:11.5px;color:var(--t2);margin-top:1px;font-weight:500}
+.cnt{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:0 14px 16px;scroll-behavior:smooth}
+.cnt::-webkit-scrollbar{display:none}
+.tbar{height:var(--tab);padding-bottom:env(safe-area-inset-bottom,0);background:rgba(10,10,16,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-around;flex-shrink:0;z-index:50}
+.tb{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;color:var(--t3);cursor:pointer;font-size:9.5px;font-weight:600;font-family:inherit;padding:5px 0;min-width:52px;transition:color .12s}
+.tb .ti{font-size:19px;transition:transform .12s}
+.tb.on{color:var(--acc2)}.tb.on .ti{transform:scale(1.12)}
+.pnl{display:none}.pnl.on{display:block;animation:fu .2s ease}
+@keyframes fu{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.srow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.sc{background:var(--s1);border-radius:13px;padding:12px 8px;border:1px solid var(--bdr);text-align:center}
+.sc .n{font-size:24px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.sc .l{font-size:9px;color:var(--t2);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-top:3px}
+.slbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--t3);margin:16px 0 8px 2px}
+.cd{background:var(--s1);border-radius:13px;padding:12px 13px;border:1px solid var(--bdr);margin-bottom:8px;cursor:pointer;transition:transform .08s;position:relative;overflow:hidden}
+.cd:active{transform:scale(.985)}
+.cd .tt{font-size:13px;font-weight:600;line-height:1.35}
+.cd .su{font-size:11px;color:var(--t2);margin-top:3px;line-height:1.35}
+.cd .dt{max-height:0;overflow:hidden;transition:max-height .28s ease,padding .28s;font-size:11px;color:var(--t2);line-height:1.55}
+.cd.ex .dt{max-height:900px;padding-top:9px}
+.cd .chv{position:absolute;right:12px;top:12px;font-size:10px;color:var(--t3);transition:transform .2s}
+.cd.ex .chv{transform:rotate(180deg)}
+.pt{display:inline-block;padding:2px 7px;border-radius:5px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-bottom:4px}
+.pt.u{background:var(--rbg);color:var(--red)}.pt.r{background:var(--obg);color:var(--ora)}.pt.g{background:var(--gbg);color:var(--grn)}.pt.i{background:var(--bbg);color:var(--blu)}.pt.p{background:var(--pbg);color:var(--pur)}
+.cd.br{border-left:2.5px solid var(--red)}.cd.bo{border-left:2.5px solid var(--ora)}.cd.bg{border-left:2.5px solid var(--grn)}.cd.bb{border-left:2.5px solid var(--blu)}.cd.bp{border-left:2.5px solid var(--pur)}
+.wc{background:linear-gradient(135deg,rgba(52,210,123,.04),rgba(124,106,239,.04));border-radius:13px;padding:12px 13px;border:1px solid rgba(52,210,123,.12);margin-bottom:8px;cursor:pointer;transition:transform .08s}
+.wc:active{transform:scale(.985)}
+.wc .wi{font-size:15px;margin-bottom:3px}
+.wc .wt{font-size:13px;font-weight:600;margin-bottom:2px}
+.wc .ws{font-size:11px;color:var(--t2);line-height:1.35}
+.wc .wd{max-height:0;overflow:hidden;transition:max-height .28s ease;font-size:11px;color:var(--t2);line-height:1.55}
+.wc.ex .wd{max-height:500px;padding-top:9px}
+.rb{background:var(--s2);border:1px solid var(--bdr);border-radius:11px;padding:10px 12px;margin-bottom:8px;font-size:10.5px;color:var(--t2);line-height:1.5}
+.rb strong{font-weight:700}
+.rb .rh{color:var(--ora);font-weight:700;font-size:9.5px;text-transform:uppercase;letter-spacing:.3px;margin-bottom:4px}
+.gtm{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.gi{background:var(--s2);border-radius:9px;padding:7px 10px;font-size:10px;border:1px solid var(--bdr)}
+.gi .sp{color:var(--acc2);font-weight:700;font-size:9.5px;text-transform:uppercase;letter-spacing:.3px}
+.gi .nm{color:var(--t2);margin-top:1px}
+.hero{background:linear-gradient(135deg,rgba(124,106,239,.08),rgba(77,142,247,.06));border:1px solid rgba(124,106,239,.15);border-radius:13px;padding:14px;margin-bottom:14px}
+.hero .hl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--acc2);margin-bottom:6px}
+.hero .hb{font-size:12px;color:var(--t2);line-height:1.55}
+.hero b{color:var(--t1)}
+.tc{background:var(--s1);border-radius:13px;padding:12px 13px;border:1px solid var(--bdr);margin-bottom:8px;cursor:pointer;transition:transform .08s}
+.tc:active{transform:scale(.985)}
+.tc .tt2{display:flex;align-items:center;gap:10px}
+.tc .av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.tc .tnm{font-size:13px;font-weight:600}
+.tc .trl{font-size:10px;color:var(--t2)}
+.tc .td{max-height:0;overflow:hidden;transition:max-height .28s ease;font-size:11px;color:var(--t2);line-height:1.55}
+.tc.ex .td{max-height:500px;padding-top:9px}
+.check{color:var(--grn)}.pend{color:var(--ora)}.block{color:var(--red)}
+</style>
+</head>
+<body>
+<div id="lock">
+<div class="gl">📊</div>
+<h1>Merch Ops HQ</h1>
+<p>Team Hub · May 21 2026</p>
+<input type="password" id="pw" placeholder="Enter password" autocomplete="off">
+<div class="sub">mawhelan87.github.io</div>
+</div>
+<div class="frame">
+<div id="app">
+<div class="sbar"><span class="clk" id="clk">--:--</span><span class="r"><span>5G</span><span>🔋</span></span></div>
+<div class="hdr"><div class="brand"><div class="dot"></div><h1>Merch Ops HQ</h1></div><div class="sub">Thu May 21 · NBA Conference Finals · WC Prep Active</div></div>
+<div class="cnt" id="cnt">
+
+<!-- 📋 PRIORITIES -->
+<div class="pnl on" id="p0">
+
+<div class="hero">
+<div class="hl">🏀 Sport Priority · P1 All Week</div>
+<div class="hb"><b>NBA Conference Finals.</b> Custom tab switches ~2hrs before tip-off. Series scores updated in pills each morning. Monitor #unabated_nba_alerts for injury news. Tonight: <b>WCF Game 3 — SAS vs OKC (SAS -1.5 / 215)</b>. Massive injury watch — see Trading Intel below.</div>
+</div>
+
+<div class="srow">
+<div class="sc"><div class="n" style="color:var(--red)">3</div><div class="l">Urgent</div></div>
+<div class="sc"><div class="n" style="color:var(--ora)">5</div><div class="l">In Progress</div></div>
+<div class="sc"><div class="n" style="color:var(--grn)">4</div><div class="l">Wins</div></div>
+</div>
+
+<div class="slbl">🔴 Act Today — Team-Wide</div>
+
+<div class="cd br" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt u">Urgent · Card Builders</span>
+<div class="tt">WCF G3 Injury Guidance — Build Cards Carefully</div>
+<div class="su">J-Dub, Fox, Harper, Ajay all questionable · Props suspended</div>
+<div class="dt"><b style="color:var(--t1)">From Trading handover (Will S forwarded):</b><br>• <b style="color:var(--red)">J-Dub</b> — Hamstring re-aggravation, 75% lean OUT. Cason starting. Props down.<br>• <b style="color:var(--red)">Fox</b> — Ruled OUT G2, 50/50 G3. Props down. Light pre-game shooting only.<br>• <b style="color:var(--ora)">Harper</b> — Hamstring, slight lean IN. Ran out of tunnel but sent back by Spurs staff.<br>• <b style="color:var(--ora)">Ajay Mitchell</b> — Quad (non-contact), 50/50. Could be a cramp.<br>• <b style="color:var(--t1)">iHart</b> — Role expanded to 27min, closing over Chet. Infors up significantly.<br>• <b style="color:var(--t1)">SGA</b> — Hedged to 11min 1Q (may return to full if J-Dub out).<br>• <b style="color:var(--t1)">McCain</b> — Props held down. Big gainer if J-Dub/Ajay out. Had greenlight G2 (4/14, 25 min).<br>• Wemby specials up but Quad Double pulled.<br><br><b style="color:var(--t1)">Our job:</b> Avoid using questionable players in SGPs until game-day status confirmed. Monitor #unabated_nba_alerts.</div>
+</div>
+
+<div class="cd br" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt u">Urgent · Bradley</span>
+<div class="tt">CFL Pop Nav & Competition Tab Fix</div>
+<div class="su">Ethan Mackinnon request · Preseason starting this week</div>
+<div class="dt">CFL needs to move up in Pop Nav (ahead of NCAAF/NCAAB, behind PGA). Games missing a tab in football section. Bradley is working it but flagged Fandalf was routing to CDL comp instead of CFL. Confirm routing is correct and Pop Nav placement is live before CFL preseason games. Motorsport placement to be revisited when regular season starts (~2 weeks).</div>
+</div>
+
+<div class="cd br" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt u">Urgent · Cydney</span>
+<div class="tt">MLB Team X+ Home Runs Grid</div>
+<div class="su">Tristan Lee request · Popular tab + Hits and Runs tab</div>
+<div class="dt">7 MLB markets need auto-mapping to a grid. Grid name: "Team X+ Home Runs", column headers: 1+, 2+, 3+ etc. Place below Game Specials - Popular in the Popular tab and at the top of Hits and Runs tab. Tristan provided mockup. Cydney is actioning. Separate from MLB HR bet restriction — these are team-level markets.</div>
+</div>
+
+<div class="slbl">🟡 In Progress — Track This Week</div>
+
+<div class="cd bo" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt r">Blocking · Nelson Campinho</span>
+<div class="tt">SGP+ Feature Flags — Enabling Dual HP Display</div>
+<div class="su">Parlays & SGP simultaneously approved · Waiting on flag update</div>
+<div class="dt"><b style="color:var(--t1)">From parlay module bi-weekly (Simon Stasiak notes):</b><br>• SGP+ available June 8 (7-leg bug + images bug fixed in app release).<br>• Parlays & SGP on HP simultaneously: Raquel confirmed no load issues. <b style="color:var(--ora)">Nelson needs to add bet types to HP feature flag.</b><br>• PPM minimum legs drop to 3: Raquel hopes perf testing done EOW.<br>• PPM not visible under custom tabs during SGP+ testing: Nelson investigating.<br>• Long player/team names: spike in sprint beginning June 15.<br><br><b style="color:var(--t1)">Our job:</b> Track daily. Once flags are updated, we're free to start offering SGP & Parlays simultaneously.</div>
+</div>
+
+<div class="cd bo" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt r">Multi-Team · First Week of June</span>
+<div class="tt">Soccer Sport Page — WC Workaround Plan</div>
+<div class="su">Wyn Diaz posted plan · Performance issues on featured tab</div>
+<div class="dt"><b style="color:var(--t1)">Decision:</b> Push full page rollout to after World Cup. Performance issues on featured tab too risky for WC.<br><br><b style="color:var(--t1)">Workaround (first week of June):</b><br>1. Point Pop Nav soccer icon → WC Competition Page<br>2. Update "More soccer" link → WC Competition Page<br>3. Ensure WC Custom tab links → WC Competition Page<br>4. Update All Sports soccer link → WC Competition Page <span class="pend">(needs Michael T & Aashini via FanDalf)</span><br><br>WC Competition page is already live. DDUI features + templates available. Search still routes to old page. Commercial/tech/product aligned.</div>
+</div>
+
+<div class="cd bo" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt r">Aashini · Bradley · Will E</span>
+<div class="tt">Canada — Alberta Launch Readiness</div>
+<div class="su">Provincial HP split · PopNav config · Parlay Hub A/B</div>
+<div class="dt"><b style="color:var(--t1)">Active items:</b><br>• <span class="check">✓</span> Alberta added to SBK services cron warm jobs (PAS-1428)<br>• <span class="check">✓</span> Casino showing in PopNav for Alberta builds<br>• <span class="pend">⏳</span> Will E copying Ontario PopNav to Alberta (Novelties + TSN markets)<br>• <span class="pend">⏳</span> Market tabs still to action<br>• <span class="pend">⏳</span> Separate Parlay Hub A/B test needed for Canada (Simon to set up with Drew)<br>• Niall flagged: product should have given Canada separate Sanity environment<br>• Niall suggested: give Bradley more ownership of Canada space<br><br><b style="color:var(--t1)">Our job:</b> Full alignment before second province added. Confirm HP correctly split by province (Alberta vs Ontario).</div>
+</div>
+
+<div class="cd bo" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt r">Simon · Raquel</span>
+<div class="tt">Parlay Hub US Decomm Investigation</div>
+<div class="su">Simon checking if US-only decomm is possible + performance benefits</div>
+<div class="dt">US happy to decomm Parlay Hub. Canada wants to keep it. Simon checking with Raquel: can we decomm US only? What are the app performance and architecture benefits? Canada gets separate A/B test. Feeds into broader parlay module strategy.</div>
+</div>
+
+<div class="cd bo" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt r">Zack · Niall · Wyn · Nate</span>
+<div class="tt">Homepage Pinning vs Recommendation Model</div>
+<div class="su">Active debate · Zack/Wyn/Nate meeting to align</div>
+<div class="dt">Big convo from last week. Sean's data backs pinning — niche competitions (Icelandic Basketball, Brazilian NBB) occupied P3-P5 with virtually zero bets when the model ran freely. Zack shared Sanity Vision tool for auditing content placement. Elijah noted overnight hours may still benefit from the recommender since nothing needs pinning.<br><br><b style="color:var(--t1)">Our job:</b> Share Merch Ops view before decisions are locked. We execute daily HP ordering — our experience matters here.</div>
+</div>
+</div>
+
+<!-- 📊 SBK UPDATES -->
+<div class="pnl" id="p1">
+
+<div class="hero">
+<div class="hl">📊 SBK Updates · 3:15pm ET</div>
+<div class="hb"><b>Top 5 Overall:</b> ⚾ Baseball 2.91M · 🏀 Basketball 2.74M · 🎾 Tennis 822K · ⛳ Golf 210K<br><br><b>Live Leaders:</b> 🎾 Tennis 457K · ⛳ Golf 111K (highest of the week — PGA in critical round)<br><br><b>#1 Selection:</b> Donovan Mitchell 187K (Cavs vs Knicks matchup cluster dominating)</div>
+</div>
+
+<div class="slbl">Trading Intel · Tonight</div>
+
+<div class="cd bb" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt i">WCF G3</span>
+<div class="tt">SAS vs OKC — Key Prop Movements</div>
+<div class="su">Opened SAS -1.5 (0.485) / 215</div>
+<div class="dt">Fair bit of injury variance added to props. Once news confirmed, variance needs removing. Key player changes:<br>• iHart back to 27min, closing over Chet, 8 reb in final quarter (5 offensive). Infors increased significantly to reflect G1 levels.<br>• Caruso another very strong performance — watch for volume.<br>• Dort saw very little burn in 2nd half (20 sec in final Q).<br>• McLaughlin picked up 7min for ball handling relief.<br>• Wemby specials up onsite. Quad Double down due to injury chaos.</div>
+</div>
+
+<div class="slbl">Active Trading Restrictions</div>
+
+<div class="rb">
+<div class="rh">⚾ MLB</div>
+<strong style="color:var(--red)">No Home Run bets or parlay promos</strong> — non-HR props are fine. Team X+ HR grid request (Tristan Lee) is team-level and separate from this restriction.
+</div>
+<div class="rb">
+<div class="rh">🏀 NBA</div>
+<strong style="color:var(--ora)">Star Players template paused</strong> — awaiting Trading all-clear. Do not use Star Players format in cards until confirmed.
+</div>
+<div class="rb">
+<div class="rh">🛡️ Bet Protect+</div>
+<strong>NJ, PA, MA, NC, TN, CT, VT excluded</strong> from geo-targeted placements. Check state targeting before publishing.
+</div>
+<div class="rb">
+<div class="rh">⚖️ Illinois</div>
+<strong>Bet Protect permanent banner on hold</strong> pending regulatory decision. No action needed until further notice.
+</div>
+
+<div class="slbl">Experiments · Active</div>
+
+<div class="cd bb" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt i">Rolled Back</span>
+<div class="tt">Combined SGP + Popular Tab on MLB Event Pages</div>
+<div class="su">Significant decrease in parlay & SGP/+ bet mix · No lift to conversion</div>
+<div class="dt">Decision: Rollback. Next steps: revisit with NFL or NCAAF where more non-SGP enabled markets could offset bet mix impact. POCs: Zack Jenis, Sean Gorwara. UXA POC: Drew Budinsky. Key learning for next season's event page strategy.</div>
+</div>
+
+<div class="cd bb" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt i">Tracking</span>
+<div class="tt">PPM Cards — NBA & Soccer Market Issues</div>
+<div class="su">Chad & Will S monitoring · No issues seen since last report</div>
+<div class="dt">Previously reported new market issues with NBA and Soccer in parlay module. Chad and Will agreed to keep checking. Both advised they haven't seen issues recur. If they do, a spike will be raised to investigate.</div>
+</div>
+
+<div class="slbl">Sanity Tooling</div>
+
+<div class="cd bb" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt i">New Tool</span>
+<div class="tt">Sanity Vision — Content Audit Capability</div>
+<div class="su">Zack shared in #sbk-betting-plans · Read-only GROQ query runner</div>
+<div class="dt">Vision lets you query any doc type, inspect field structures, find documents by condition, check populated vs null fields, trace references, debug broken references, and export JSON/CSV for audits. Read-only — no mutations. Useful for finding all marketLayouts with blurbs, doing bulk content audits, or reverse-engineering schema from responses. Cydney used it to verify Sanity placements across HP, competition, and event pages.</div>
+</div>
+</div>
+
+<!-- 📅 WEEKLY DIGEST -->
+<div class="pnl" id="p2">
+
+<div class="hero">
+<div class="hl">📅 Week of May 18 · Intelligence Digest</div>
+<div class="hb">From your Monday digest in #merchops_execution_lt. NBA Conference Finals P1 all week, EFL Play-Off Finals this weekend, homepage pinning debate active, World Cup prep accelerating.</div>
+</div>
+
+<div class="slbl">🟢 Sport Priorities This Week</div>
+
+<div class="cd bg" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt g">P1 · All Week</span>
+<div class="tt">🏀 NBA Conference Finals</div>
+<div class="su">Custom tab before tip-off · Series scores in pills · Zara nailing it</div>
+<div class="dt">Custom tab confirmed to drive better conversion on 1-2 game slates. NBA and NHL flex daily based on playoff slate. Custom tab switches ~2hrs before tip-off. Keep series scores updated in pills each morning.<br><br><b style="color:var(--t1)">Our job:</b> Custom tab live before tip-off each night, series scores updated daily.</div>
+</div>
+
+<div class="cd bo" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt r">This Weekend · Sat-Mon</span>
+<div class="tt">⚽ EFL Play-Off Finals at Wembley</div>
+<div class="su">Championship (Sat 23) · League One (Sun 24) · League Two (Mon 25)</div>
+<div class="dt">Big UK/Ireland commercial soccer moments. Check with Elliott Radin on promotional surface support.<br><br><b style="color:var(--t1)">Our job:</b> Confirm with Elliott R if surface support needed.</div>
+</div>
+
+<div class="cd bb" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt i">June 7</span>
+<div class="tt">🏎️ F1 Monaco GP — Pinning Request</div>
+<div class="su">Katie Forman asked in #merch_x_gtm · 9AM ET Sunday</div>
+<div class="dt">Pin F1 Sunday morning, ideally from Saturday night after other sports conclude. Add to scheduling calendar.</div>
+</div>
+
+<div class="slbl">🌍 World Cup Readiness Tracker</div>
+
+<div class="cd bp" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt p">WC Tracker</span>
+<div class="tt">FIFA World Cup — Workstream Status</div>
+<div class="su">US-hosted · Expectations very high · Multiple workstreams converging</div>
+<div class="dt"><b style="color:var(--t1)">Done:</b><br><span class="check">✓</span> WC Competition page live and ready<br><span class="check">✓</span> Alberta added to SBK services (PAS-1428)<br><span class="check">✓</span> WC player pages being added (Vlad Evdokimov PR)<br><span class="check">✓</span> DDUI features + templates available for HP, EP, and WC Competition page<br><span class="check">✓</span> Schedule tab filter pills for group stage (TOAD-1537)<br><span class="check">✓</span> FastTrack: Sports Challenges, Tournaments, Match Day Predictor launching for WC<br><br><b style="color:var(--t1)">Pending:</b><br><span class="pend">⏳</span> Soccer Sport Page postponed — workaround plan in place (Wyn Diaz)<br><span class="pend">⏳</span> Soccer live scores bug — was flagged as WC blocker May 16. Chase status.<br><span class="pend">⏳</span> WC player carousel tickets in backlog (ATLUTD-4632/4634/4635)<br><span class="pend">⏳</span> WC "including extra time" markets — some not whitelisted for HP PPM (Chad flagged)<br><span class="pend">⏳</span> More WC content needed in team planning docs (per Chad)<br><br><b style="color:var(--t1)">Strategic context:</b> Simon Stasiak shared sporting calendar data: NBA Finals 14M+ bets (4-7 games), Super Bowl 13.5M+ in one game. WC US-hosted expectations very high. Strong case for prioritising WC surface investment now.</div>
+</div>
+
+<div class="slbl">🔗 Where Merch Ops Helps Trading</div>
+
+<div class="cd bb" onclick="t(this)"><div class="chv">▾</div>
+<span class="pt i">Ongoing</span>
+<div class="tt">This Week's Trading Support Items</div>
+<div class="su">From your weekly digest</div>
+<div class="dt">• <b style="color:var(--t1)">Soccer live scores bug</b> — Was WC blocker. Chase Engineering for status update.<br>• <b style="color:var(--t1)">Homepage pinning strategy</b> — We execute daily HP ordering, contribute our experience before decisions lock.<br>• <b style="color:var(--t1)">NBA/GTM planning</b> — Zack shared roadmap notes: HP display optimisation by event count, EP/CP ordering consistency for next NBA season.<br>• <b style="color:var(--t1)">SGP/Popular tabs on MLB EP</b> — Rolled back. Learnings will inform NBA event page next year.<br><br><b style="color:var(--t1)">Strategic insight:</b> Soccer betting peaks sharply at 3pm ET then declines — consider moving soccer down post-3pm on non-European fixture days.</div>
+</div>
+
+<div class="slbl">📞 GTM Contacts</div>
+<div class="gtm">
+<div class="gi"><div class="sp">NBA/WNBA</div><div class="nm">Thomas Lapham</div></div>
+<div class="gi"><div class="sp">MLB/Tennis</div><div class="nm">Matt Heffley</div></div>
+<div class="gi"><div class="sp">Soccer</div><div class="nm">Elliott Radin</div></div>
+<div class="gi"><div class="sp">World Cup</div><div class="nm">Joseph Cundall</div></div>
+<div class="gi"><div class="sp">NFL/Golf</div><div class="nm">Matthew Knowles</div></div>
+<div class="gi"><div class="sp">NHL/Combat</div><div class="nm">Katie Forman</div></div>
+<div class="gi"><div class="sp">College</div><div class="nm">Rebecca Kilcoyne</div></div>
+</div>
+</div>
+
+<!-- 👥 TEAM -->
+<div class="pnl" id="p3">
+<div class="slbl">Who's On What Today</div>
+
+<div class="tc" onclick="t(this)">
+<div class="tt2"><div class="av" style="background:linear-gradient(135deg,#6366f1,#818cf8)">WE</div><div><div class="tnm">Will Eklund</div><div class="trl">Alberta PopNav · SGP+ flags · Shawn 13yr celebration</div></div></div>
+<div class="td">Copying Ontario PopNav to Alberta for Novelties/TSN markets. Coordinating with Mollie Tate on window-shopping readiness. Celebrated Shawn Brooker's 13-year milestone in #merchops. Tracking SGP+ feature flag enablement from Nelson.</div>
+</div>
+
+<div class="tc" onclick="t(this)">
+<div class="tt2"><div class="av" style="background:linear-gradient(135deg,#22c55e,#4ade80)">AD</div><div><div class="tnm">Aashini Desai</div><div class="trl">Canada Alignment lead · Soccer page workaround · FanDalf</div></div></div>
+<div class="td">Leading Canada Alignment call with Mason, Niall, Bradley, Chantel. Filled out planning timings over the weekend. Needed for FanDalf All Sports soccer link update (with Michael T). Alberta provincial HP split confirmation.</div>
+</div>
+
+<div class="tc" onclick="t(this)">
+<div class="tt2"><div class="av" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)">MT</div><div><div class="tnm">Michael Thompson</div><div class="trl">US Ops · FanDalf update · Daily HP ordering</div></div></div>
+<div class="td">Day-to-day US merch execution during Conference Finals. Needed for Soccer Sport Page workaround — FanDalf All Sports update. Confirmed Cydney's Sanity placements across HP, competition, and event pages. Helping hunt down scattered blurb placements.</div>
+</div>
+
+<div class="tc" onclick="t(this)">
+<div class="tt2"><div class="av" style="background:linear-gradient(135deg,#ef4444,#f87171)">CR</div><div><div class="tnm">Chad Rowley</div><div class="trl">WCF G3 card building · PPM strategy · WC markets</div></div></div>
+<div class="td">Building WCF G3 cards with injury-adjusted selections. Flagged WC "including extra time" markets not whitelisted for HP PPM. Monitoring NBA/Soccer market issues (resolved). Offered as Sanity backstop with Glen & Dylan.</div>
+</div>
+
+<div class="tc" onclick="t(this)">
+<div class="tt2"><div class="av" style="background:linear-gradient(135deg,#a855f7,#c084fc)">WS</div><div><div class="tnm">Will Schleichert</div><div class="trl">PPM Scorecard · SGP+ product updates · WCF injury notes</div></div></div>
+<div class="td">Built PPM Weekly Scorecard (MVP of the Day). Shared SGP+ product call updates: June 8 launch, dual display ready once flags flip. Forwarded WCF injury handover notes for all card builders. Monitoring card drops and BO UI issues.</div>
+</div>
+
+<div class="tc" onclick="t(this)">
+<div class="tt2"><div class="av" style="background:linear-gradient(135deg,#14b8a6,#2dd4bf)">DM</div><div><div class="tnm">Dylan Mendelowitz</div><div class="trl">Sanity discipline · Nightly checklist · NBA combo liquidity</div></div></div>
+<div class="td">MVP of the Day (May 19). Driving nightly Sanity setup discipline: Carousel, auto-pub, combos in pop nav. Calm judgment on NBA combo liquidity (raised to CME), carousel naming, trade-volume sort timing. Backstop with Glen & Chad.</div>
+</div>
+
+<div class="tc" onclick="t(this)">
+<div class="tt2"><div class="av" style="background:linear-gradient(135deg,#ec4899,#f472b6)">NC</div><div><div class="tnm">Niall Connolly</div><div class="trl">Homepage Sync · Canada strategy · Pinning debate</div></div></div>
+<div class="td">HP Sync at 10am, Canada Alignment at 10:30. Leading pinning vs recommendation model debate. Suggested Bradley to own Canada space. Flagged Canada needs separate Sanity environment.</div>
+</div>
+
+<div class="tc" onclick="t(this)">
+<div class="tt2"><div class="av" style="background:linear-gradient(135deg,#f97316,#fb923c)">BK</div><div><div class="tnm">Bradley Korrub</div><div class="trl">CFL Pop Nav · Alberta build · Canada ownership</div></div></div>
+<div class="td">Actioning CFL Pop Nav move-up and competition tab routing fix. Working Alberta build readiness with Mollie. Growing into Canada space ownership per Niall's suggestion.</div>
+</div>
+
+<div class="tc" onclick="t(this)">
+<div class="tt2"><div class="av" style="background:linear-gradient(135deg,#3b82f6,#60a5fa)">CT</div><div><div class="tnm">Cydney Tindal</div><div class="trl">MLB HR grid · Sanity placements · Content updates</div></div></div>
+<div class="td">Actioning Tristan Lee's MLB Team X+ Home Runs grid in Popular and Hits and Runs tabs. Completed Sanity placements across HP, competition, and event pages. Trading content execution.</div>
+</div>
+
+<div class="tc" onclick="t(this)">
+<div class="tt2"><div class="av" style="background:linear-gradient(135deg,#64748b,#94a3b8)">ZJ</div><div><div class="tnm">Zack Jenis</div><div class="trl">Strategy · MVPs · Sanity Vision · Automation</div></div></div>
+<div class="td">Driving AI tooling adoption and team recognition (MVP awards). Shared Sanity Vision for content audits. Experiment POC on SGP/Popular rollback. HP pinning alignment with Wyn/Nate. #merchops-automation discussions re: Claude plugins and Amplitude connector permissions.</div>
+</div>
+
+<div class="tc" onclick="t(this)">
+<div class="tt2"><div class="av" style="background:linear-gradient(135deg,#0ea5e9,#38bdf8)">EJ</div><div><div class="tnm">Elijah Jones</div><div class="trl">Data analysis · Amplitude · Overnight recommender</div></div></div>
+<div class="td">Working with Claude/Amplitude connector (write/delete tools needing approval). Noted overnight hours could benefit from recommendation model vs pinning. Supporting data-driven decision making across the team.</div>
+</div>
+</div>
+
+<!-- 🌟 WINS -->
+<div class="pnl" id="p4">
+<div class="slbl">This Week's Wins</div>
+
+<div class="wc" onclick="t(this)">
+<div class="wi">🏆</div>
+<div class="wt">Will Schleichert — PPM Weekly Scorecard</div>
+<div class="ws">MVP of the Day · SBK-style dashboard with Featured Players leaderboard</div>
+<div class="wd">Full performance dashboard for Popular Parlay Module. CVR, handle, GGR, avg $/bet, cards built in carousel format. Featured Players section with individual win rates. Wins of the Week tab with actual winning parlays. Zack: "Exactly the kind of AI-assisted tooling we should be cooking up more of." Live at willschleichert.github.io/ppm-weekly-scorecard (pw: modsquad).</div>
+</div>
+
+<div class="wc" onclick="t(this)">
+<div class="wi">⭐</div>
+<div class="wt">Dylan Mendelowitz — Operational Excellence</div>
+<div class="ws">MVP of the Day (May 19) · Nightly Sanity discipline</div>
+<div class="wd">Drove team-wide discipline with a sharp, constructive @channel post. Clear checklist: Carousel, auto-pub, combos in pop nav. Called out misses without finger-pointing. Offered himself, Glen, and Chad as backstop. Calm judgment on NBA combo liquidity, carousel naming, trade-volume sort timing. This is the operational baseline.</div>
+</div>
+
+<div class="wc" onclick="t(this)">
+<div class="wi">🎉</div>
+<div class="wt">Shawn Brooker — 13 Years at FanDuel</div>
+<div class="ws">Will Eklund: "We're honored to have inherited you"</div>
+<div class="wd">"even if we had to wait 12.99 years to do so." Great culture moment. 13 years with the company — now officially part of the Merch Ops family.</div>
+</div>
+
+<div class="wc" onclick="t(this)">
+<div class="wi">⚽</div>
+<div class="wt">Arsenal Win EPL — Team Vibes Through the Roof</div>
+<div class="ws">Ryan H: "Jersey on and not coming off for the rest of the week"</div>
+<div class="wd">First EPL title in 22 years. Michael: "Newcastle didn't win???" The whole team felt it. A reminder of why we love working in sports.</div>
+</div>
+
+<div class="wc" onclick="t(this)">
+<div class="wi">🇨🇦</div>
+<div class="wt">Alberta Launch Tracking Clean</div>
+<div class="ws">Will E + Mollie Tate aligning PopNav, Casino, market tabs</div>
+<div class="wd">Alberta dark live HP markets look good. Casino in PopNav. PAS-1428 merged. Ontario PopNav being copied to AB. Market tabs to action. On track for window-shopping readiness.</div>
+</div>
+
+<div class="wc" onclick="t(this)">
+<div class="wi">🤝</div>
+<div class="wt">Commercial Reputation — Strong and Growing</div>
+<div class="ws">Team praised for responsiveness across carousel ops and WC planning</div>
+<div class="wd">Commercial team called out Merch Ops for being "so responsive, great to work with and really impressive." Wyn Diaz's WC workaround had commercial, tech, and product all aligned. Our reputation for operational reliability is a competitive advantage.</div>
+</div>
+
+<div class="wc" onclick="t(this)">
+<div class="wi">🎂</div>
+<div class="wt">Happy Birthday Glen Belekis</div>
+<div class="ws">Zack: "Rarely do I @here, but it's even rarer Glen gets celebrated"</div>
+<div class="wd">Glen's off today for his birthday. "Enjoy the day off, Big Dog." Michael: "HAPPY BDAY GLEN." The team culture showing up when it matters.</div>
+</div>
+</div>
+
+</div>
+<div class="tbar">
+<button class="tb on" data-p="p0" onclick="sw(this)"><span class="ti">📋</span>Priorities</button>
+<button class="tb" data-p="p1" onclick="sw(this)"><span class="ti">📊</span>SBK</button>
+<button class="tb" data-p="p2" onclick="sw(this)"><span class="ti">📅</span>Digest</button>
+<button class="tb" data-p="p3" onclick="sw(this)"><span class="ti">👥</span>Team</button>
+<button class="tb" data-p="p4" onclick="sw(this)"><span class="ti">🌟</span>Wins</button>
+</div>
+</div>
+</div>
+<script>
+const P='merchops2026',L=document.getElementById('lock'),I=document.getElementById('pw');
+I.addEventListener('keydown',e=>{if(e.key==='Enter'){if(I.value===P){L.classList.add('off');sessionStorage.setItem('ma','1')}else{I.classList.add('err');I.value='';setTimeout(()=>I.classList.remove('err'),400)}}});
+if(sessionStorage.getItem('ma')==='1')L.classList.add('off');else I.focus();
+function uc(){document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:false})}uc();setInterval(uc,10000);
+function sw(b){document.querySelectorAll('.tb').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.pnl').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.getElementById(b.dataset.p).classList.add('on');document.getElementById('cnt').scrollTop=0}
+function t(c){c.classList.toggle('ex')}
+</script>
+</body>
+</html>
