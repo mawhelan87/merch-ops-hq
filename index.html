@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Merch Ops HQ</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+:root{--fb:#1a3260;--fb2:#1e3a6e;--fn:#0f1b33;--fd:#0c1526;--fa:#4a90d9;--t1:#fff;--t2:#8ea4c4;--t3:#5a7499;--c:#162744;--c2:#1a2f50;--b:#243a5c;--b2:#2d4a70;--r:#ef4444;--rb:rgba(239,68,68,.12);--o:#f59e0b;--ob:rgba(245,158,11,.12);--g:#22c55e;--gb:rgba(34,197,94,.12);--bl:#5ba3f5;--blb:rgba(91,163,245,.12);--p:#a78bfa;--pb:rgba(167,139,250,.12)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{height:100%;overflow:hidden;background:var(--fd);font-family:'Inter',system-ui,sans-serif;color:var(--t1)}
+#lock{position:fixed;inset:0;z-index:9999;background:linear-gradient(180deg,var(--fb),var(--fn));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .35s,transform .35s}#lock.off{opacity:0;pointer-events:none;transform:scale(1.03)}#lock .gl{width:56px;height:56px;border-radius:14px;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px;border:1px solid rgba(255,255,255,.15)}#lock h1{font-size:20px;font-weight:800}#lock p{font-size:12px;color:var(--t2);margin-top:4px;margin-bottom:24px}#lock input{width:260px;padding:14px 18px;border-radius:10px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);color:var(--t1);font-size:15px;font-family:inherit;text-align:center;outline:none}#lock input::placeholder{color:var(--t3)}#lock input:focus{border-color:var(--fa)}#lock input.err{border-color:var(--r);animation:shake .35s}#lock .sub{font-size:10px;color:var(--t3);margin-top:14px}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.frame{display:contents}@media(min-width:481px){body{display:flex;align-items:center;justify-content:center;background:#080c14}.frame{display:block;position:relative;width:390px;height:844px;border-radius:44px;border:2.5px solid #1e3050;box-shadow:0 40px 100px rgba(0,0,0,.5);overflow:hidden;background:var(--fd)}.frame::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:126px;height:33px;background:#000;border-radius:0 0 18px 18px;z-index:100}#app{position:relative;width:100%;height:100%}}
+#app{position:fixed;inset:0;background:var(--fd);overflow:hidden;display:flex;flex-direction:column}@media(min-width:481px){#app{position:relative}}
+.hdr{background:linear-gradient(180deg,var(--fb),var(--fb2));padding:max(env(safe-area-inset-top),12px) 16px 10px;flex-shrink:0}.hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.hdr-top h1{font-size:17px;font-weight:800}.hdr-top .clk{font-size:12px;color:var(--t2);font-weight:600;font-variant-numeric:tabular-nums}
+.pn{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px}.pn::-webkit-scrollbar{display:none}.pl{flex-shrink:0;padding:7px 14px;font-size:11.5px;font-weight:700;color:var(--t2);background:0;border:none;border-bottom:3px solid transparent;cursor:pointer;font-family:inherit;white-space:nowrap}.pl.on{color:#fff;border-bottom-color:var(--fa)}
+.cnt{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:12px 14px 16px;background:var(--fn)}.cnt::-webkit-scrollbar{display:none}
+.tbar{background:var(--fd);border-top:1px solid var(--b);display:flex;align-items:center;justify-content:space-around;flex-shrink:0;padding:7px 0 max(env(safe-area-inset-bottom),7px)}.tb{display:flex;flex-direction:column;align-items:center;gap:2px;background:0;border:0;color:var(--t3);cursor:pointer;font-size:9px;font-weight:600;font-family:inherit;min-width:52px}.tb svg{width:20px;height:20px;fill:currentColor}.tb.on{color:#fff}
+.X{display:none}.X.on{display:block;animation:fu .2s ease}@keyframes fu{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.hero{background:linear-gradient(135deg,var(--fb2),var(--c2));border-radius:10px;padding:12px 14px;margin-bottom:10px;border:1px solid var(--b)}.hero .hl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--fa);margin-bottom:5px}.hero .hb{font-size:11.5px;color:var(--t2);line-height:1.55}.hero b{color:var(--t1)}
+.or{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px}.ob{background:var(--c2);border:1.5px solid var(--b2);border-radius:8px;padding:10px 4px;text-align:center}.ob .ot{font-size:9px;color:var(--t2);font-weight:600}.ob .ov{font-size:20px;font-weight:800;color:var(--fa);margin-top:2px}
+.sl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--t3);margin:14px 0 7px 2px}
+.cd{background:var(--c);border-radius:10px;padding:11px 12px;border:1px solid var(--b);margin-bottom:7px;cursor:pointer;position:relative;overflow:hidden}.cd:active{transform:scale(.985)}.cd .tt{font-size:12.5px;font-weight:700;line-height:1.35}.cd .su{font-size:10.5px;color:var(--t2);margin-top:2px;line-height:1.35}.cd .dt{max-height:0;overflow:hidden;transition:max-height .28s,padding .28s;font-size:10.5px;color:var(--t2);line-height:1.6}.cd.ex .dt{max-height:900px;padding-top:8px}.cd .ch{position:absolute;right:11px;top:12px;font-size:9px;color:var(--t3);transition:transform .2s}.cd.ex .ch{transform:rotate(180deg)}
+.pt{display:inline-block;padding:2px 7px;border-radius:5px;font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-bottom:4px}.pt.u{background:var(--rb);color:var(--r)}.pt.r{background:var(--ob);color:var(--o)}.pt.g{background:var(--gb);color:var(--g)}.pt.i{background:var(--blb);color:var(--bl)}.pt.p{background:var(--pb);color:var(--p)}
+.cd.br{border-left:3px solid var(--r)}.cd.bo{border-left:3px solid var(--o)}.cd.bg{border-left:3px solid var(--g)}.cd.bb{border-left:3px solid var(--bl)}.cd.bp{border-left:3px solid var(--p)}
+.wc{background:linear-gradient(135deg,rgba(34,197,94,.05),rgba(74,144,217,.05));border-radius:10px;padding:11px 12px;border:1px solid rgba(34,197,94,.12);margin-bottom:7px;cursor:pointer}.wc:active{transform:scale(.985)}.wc .wi{font-size:14px;margin-bottom:2px}.wc .wt{font-size:12.5px;font-weight:700;margin-bottom:2px}.wc .ws{font-size:10.5px;color:var(--t2);line-height:1.35}.wc .wd{max-height:0;overflow:hidden;transition:max-height .28s;font-size:10.5px;color:var(--t2);line-height:1.6}.wc.ex .wd{max-height:500px;padding-top:8px}
+.rb{background:var(--c);border:1px solid var(--b);border-radius:8px;padding:9px 11px;margin-bottom:5px;font-size:10px;color:var(--t2);line-height:1.5}.rb .rh{color:var(--o);font-weight:800;font-size:9px;text-transform:uppercase;letter-spacing:.3px;margin-bottom:2px}
+.ck{color:var(--g)}.pd{color:var(--o)}b{color:var(--t1)}
+</style></head><body>
+<div id="lock"><div class="gl">📊</div><h1>MERCH OPS HQ</h1><p>Team Hub · Tue Jun 16, 2026</p><input type="password" id="pw" placeholder="Enter password" autocomplete="off"><div class="sub">mawhelan87.github.io</div></div>
+<div class="frame"><div id="app">
+<div class="hdr"><div class="hdr-top"><h1>MERCH OPS HQ</h1><span class="clk" id="clk">--:--</span></div>
+<div class="pn"><button class="pl on" data-p="p0">📋 Priorities</button><button class="pl" data-p="p1">📊 SBK</button><button class="pl" data-p="p2">📅 Week</button><button class="pl" data-p="p3">📋 Tasklist</button><button class="pl" data-p="p4">🌟 Wins</button></div></div>
+<div class="cnt" id="cnt">
+
+<!-- PRIORITIES -->
+<div class="X on" id="p0">
+<div class="hero"><div class="hl">⚽ WC Team Tabs Live Today · ⛳ US Open · 🏒 Stanley Cup Finals</div>
+<div class="hb"><b>France & Argentina cohort tabs going live on HP today.</b> HP ordering: World Cup, France*, Argentina*, MLB, WNBA. WC Futures added back to HP last night (Jack Navin request, Ryan actioned). US Open golf grid display issue flagged. Weekly Digest canvas updated at 9am.</div></div>
+
+<div class="or"><div class="ob"><div class="ot">MEETINGS</div><div class="ov" style="color:var(--fa)">6</div></div><div class="ob"><div class="ot">ACTIONS</div><div class="ov" style="color:var(--o)">5</div></div><div class="ob"><div class="ot">WINS</div><div class="ov" style="color:var(--g)">5</div></div></div>
+
+<div class="sl">📅 Team Meetings Today</div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><div class="tt">9:15 — Merch Ops Brainstorm #1</div><div class="su">Claudia Baim · You, Michael T, Glen, Chad · JC Spread</div><div class="dt">First brainstorm with Claudia. She had intros + your 1:1 yesterday. Follow-up session at 3pm today.</div></div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><div class="tt">10:00 — Homepage Sync</div><div class="su">Niall · Mahima, Darren, Aashini, Bradley, Will E, Cydney, Collin, Ryan H, Shane</div><div class="dt">WC team tabs going live today. France & Argentina cohort-targeted. Confirm HP ordering aligns with Aashini's plan. Discuss US Open golf grid issue.</div></div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><div class="tt">11:30 — WC Readiness (MerchOps × OE)</div><div class="su">Erin Donnelly · Chad, Ky, Justin P, Niall</div><div class="dt">Week 1 review. USA pill strong performer. WC Futures back on HP. Novelty page growing (halftime market added yesterday). Playbook in Confluence.</div></div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><div class="tt">12:15 — Merch Performance Review</div><div class="su">Drew Budinsky · OKRs + experiments + WC Week 1 data</div><div class="dt">First full week of WC data. Niall's Amplitude board has weekend performance. User-created combos adoption data. You, Chad, Michael T, Will S, Glen, Aashini, Elijah, Zack, Sean, Kim, Drew.</div></div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><div class="tt">1:30 — Racing CS Weekly Sync</div><div class="su">Dylan Lynch · Will E, Shawn, Zack, IT Ops</div><div class="dt">Racing content + IT operations weekly. Bryan Dorr, Christa, Bill Caldwell, Shawn, Will E, Zack.</div></div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><div class="tt">3:00 — Merch Ops Brainstorm #2</div><div class="su">Claudia Baim · You, Chad, Michael T, Glen · JC Spread</div><div class="dt">Continuation from morning session.</div></div>
+
+<div class="sl">🔴 Act Today</div>
+<div class="cd br" onclick="t(this)"><div class="ch">▾</div><span class="pt u">Fix</span><div class="tt">⛳ US Open Golf — Make/Miss Cut Grid Issue</div><div class="su">Lachlan Holman flagged this morning · Display grid broken</div><div class="dt">"Some funky things happening with US Open golf make/miss cut display grid." May be due to market suspension. Alex Lobianco cc'd. Investigate and fix — US Open is a major.</div></div>
+<div class="cd br" onclick="t(this)"><div class="ch">▾</div><span class="pt u">Action</span><div class="tt">NASCAR — Race Mapping + In-Season Tab Reorder</div><div class="su">Philip Ezergailis (race mapping) + Shannon Oros (tab reorder)</div><div class="dt">Philip posted NASCAR race overnight — needs mapping. Shannon wants In-Season Challenge moved left of NASCAR and F1 Futures tabs for more visibility.</div></div>
+
+<div class="sl">🟡 In Progress</div>
+<div class="cd bo" onclick="t(this)"><div class="ch">▾</div><span class="pt r">Live Today</span><div class="tt">⚽ WC Team Tabs — France & Argentina</div><div class="su">Cohort-targeted · HP ordering: WC, France*, Argentina*, MLB, WNBA</div><div class="dt">Aashini's plan: display to a cohort of users. Thursday: custom USA tab goes live. Friday: USA becomes P1 pill within WC tab + Brazil tab. Same pattern as last week.</div></div>
+<div class="cd bo" onclick="t(this)"><div class="ch">▾</div><span class="pt r">Rotation</span><div class="tt">Supersub / Community Banner — US Only</div><div class="su">Community at 4am · Supersub later · Reminders active</div><div class="dt">Slackbot reminders firing daily. Community banner went on at 4am. Ensure correct for evening peak.</div></div>
+<div class="cd bo" onclick="t(this)"><div class="ch">▾</div><span class="pt r">Open</span><div class="tt">WC Futures — Now Back on HP</div><div class="su">Jack Navin requested Mon night · Ryan added it</div><div class="dt">Jack flagged WC Futures weren't on HP. "Prob worth a spot ahead of NBA/NHL futures." Ryan actioned it in Monday night handover.</div></div>
+</div>
+
+<!-- SBK -->
+<div class="X" id="p1">
+<div class="hero"><div class="hl">📊 SBK Updates · Tue Jun 16</div>
+<div class="hb"><b>Weekly Digest updated 9am.</b> WC team tabs live today. US Open major underway. Stanley Cup Finals active. WC Futures restored to HP. Aashini's Live Now ordering reminders firing via Amplitude dashboard link.</div></div>
+
+<div class="sl">Trading Content · Today</div>
+<div class="cd br" onclick="t(this)"><div class="ch">▾</div><span class="pt u">Fix</span><div class="tt">⛳ US Open — Make/Miss Cut Grid Display</div><div class="su">Lachlan Holman · Possibly market suspension related</div><div class="dt">Display grid behaving oddly. Alex Lobianco cc'd. Priority — major championship.</div></div>
+<div class="cd bo" onclick="t(this)"><div class="ch">▾</div><span class="pt r">Map</span><div class="tt">🏎️ NASCAR — Race + In-Season Challenge Reorder</div><div class="su">Philip (race) + Shannon (tab reorder)</div><div class="dt">Map new race. Move In-Season Challenge left of NASCAR/F1 Futures.</div></div>
+
+<div class="sl">Completed Yesterday</div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><span class="pt g">Done</span><div class="tt">Monday Trading Queue — Cleared</div><div class="su">Ryan + shift team completed yesterday</div><div class="dt"><span class="ck">✓</span> Stanley Cup pill restored<br><span class="ck">✓</span> NBA Draft Top X Pick mapped<br><span class="ck">✓</span> WC Novelty halftime market added<br><span class="ck">✓</span> WC Futures added back to HP<br><span class="ck">✓</span> NASCAR requests actioned<br><span class="ck">✓</span> UFC HP ordering fixed</div></div>
+
+<div class="sl">HP Ordering · Today</div>
+<div class="rb"><div class="rh">⚽ Homepage</div>World Cup, France* (cohort), Argentina* (cohort), MLB, WNBA</div>
+<div class="rb"><div class="rh">📱 Live Now</div>Check Aashini's Amplitude dashboard for ordering</div>
+
+<div class="sl">Handovers</div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><span class="pt g">Ryan · Mon Night</span><div class="tt">Nothing major · NASCAR + NBA Draft done · WC Futures added</div><div class="su">HP good for overnight</div><div class="dt">Clean handover. All Monday requests actioned. WC Futures added at Jack Navin's request.</div></div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><span class="pt g">Zara · AUS</span><div class="tt">Nothing major to report</div><div class="su">Clean overnight</div><div class="dt">Smooth transition.</div></div>
+</div>
+
+<!-- WEEK -->
+<div class="X" id="p2">
+<div class="hero"><div class="hl">📅 Week of Jun 16 · WC Dominating</div>
+<div class="hb"><b>WC Week 1 strong.</b> USA pill top HP performer. ~25M viewers for US game. Team tabs rolling out daily. Custom USA tab Thursday. Stanley Cup Finals continue. US Open this week. User-created combos live.</div></div>
+
+<div class="sl">WC HP Plan This Week</div>
+<div class="cd bp" onclick="t(this)"><div class="ch">▾</div><span class="pt p">Aashini's Plan</span><div class="tt">⚽ World Cup — Daily HP Strategy</div><div class="su">Cohort tabs + custom tabs + pill rotation</div><div class="dt"><b>Today (Tue):</b> France & Argentina team tabs (cohort)<br><b>Thu:</b> Custom USA tab on HP<br><b>Fri:</b> USA becomes P1 pill within WC tab + Brazil team tab<br><b>Sat/Sun:</b> TBD based on match schedule<br>Supersub/Community banner rotation continues daily (US only).</div></div>
+
+<div class="sl">Sport Priorities</div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><span class="pt g">P1</span><div class="tt">⚽ World Cup — Live & Performing</div><div class="su">USA pill strong · WC Futures on HP · Novelty content growing</div><div class="dt">WC Readiness call today. WC Merch Sync tomorrow (Rebecca Kilcoyne). Amplitude data showing strong engagement. Check Niall's board for weekend numbers.</div></div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><span class="pt g">Active</span><div class="tt">🏒 Stanley Cup Finals</div><div class="su">Pill restored · NHL marquee live · NHL Draft content mapped</div><div class="dt">Finals active. NHL Futures 2026-27 tab on HP. NHL Draft markets + void blurb added (Evan Render).</div></div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><span class="pt g">Major</span><div class="tt">⛳ PGA US Open</div><div class="su">Pop Nav updated · Make/miss cut grid issue flagged today</div><div class="dt">Cydney updated Pop Nav and competition tabs to "U.S Open" on Sunday. Grid display issue being investigated today (Lachlan/Alex).</div></div>
+
+<div class="sl">Tomorrow · Wed Jun 17</div>
+<div class="cd bb" onclick="t(this)"><div class="ch">▾</div><div class="tt">10:00 — Homepage Sync</div><div class="su">Niall · Full ops crew</div><div class="dt">Daily HP alignment. France/Argentina tabs live, track performance.</div></div>
+<div class="cd bb" onclick="t(this)"><div class="ch">▾</div><div class="tt">10:05 — Product Early Look</div><div class="su">Lawrence Lee · All-company product showcase</div><div class="dt">Massive invite list. New product opportunities in early discovery. ATL, EDI, NY, Zoom.</div></div>
+<div class="cd bb" onclick="t(this)"><div class="ch">▾</div><div class="tt">12:00 — WC Merchandizing Sync</div><div class="su">Rebecca Kilcoyne · You, Niall, Chad, Aashini, Shane, Elliott, Drew, Sean, Sam G</div><div class="dt">Recurring WC touch point. Red Wings room + Zoom.</div></div>
+<div class="cd bb" onclick="t(this)"><div class="ch">▾</div><div class="tt">12:30 — Merch Ops: The Way Forward</div><div class="su">You · Chad, Michael T, Niall, Glen, Will S · Money Line room</div><div class="dt">Your meeting. Strategy session on team direction.</div></div>
+</div>
+
+<!-- TASKLIST -->
+<div class="X" id="p3">
+<div class="hero"><div class="hl">📋 Shift Actions · Tue Jun 16</div>
+<div class="hb"><b>Weekly Digest updated 9am.</b> Aashini's HP ordering set: WC, France*, Argentina*, MLB, WNBA. Live Now ordering via Amplitude dashboard. Community banner went on at 4am. Zara's AUS handover clean. Ryan's US handover clean.</div></div>
+
+<div class="sl">Fix Now</div>
+<div class="cd br" onclick="t(this)"><div class="ch">▾</div><span class="pt u">Priority</span><div class="tt">US Open Make/Miss Cut Grid — Display Bug</div><div class="su">Lachlan Holman · May be market suspension related · Alex Lobianco cc'd</div><div class="dt">US Open is a major — fix urgently. Check if market suspension is causing the display issue or if it's a mapping problem.</div></div>
+
+<div class="sl">Content Queue</div>
+<div class="cd bo" onclick="t(this)"><div class="ch">▾</div><span class="pt r">Today</span><div class="tt">NASCAR: Race Map + In-Season Challenge Reorder</div><div class="su">Philip (map race) · Shannon (move ISC left of Futures)</div><div class="dt">Two separate requests. ISC needs more visibility — move left of NASCAR and F1 Futures tabs.</div></div>
+
+<div class="sl">WC Surface Actions</div>
+<div class="cd bo" onclick="t(this)"><div class="ch">▾</div><span class="pt r">Today</span><div class="tt">France & Argentina Team Tabs — Go Live</div><div class="su">Cohort-targeted · Per Aashini's HP plan</div><div class="dt">Display to subset of users. Same approach as last week. Track engagement via Niall's Amplitude board.</div></div>
+<div class="cd bb" onclick="t(this)"><div class="ch">▾</div><span class="pt i">Thursday</span><div class="tt">USA Custom Tab — Prep for Thursday</div><div class="su">Becomes P1 WC pill on Friday</div><div class="dt">Custom USA tab on HP Thursday. On Friday it moves inside WC tab as P1 pill + Brazil team tab goes live.</div></div>
+
+<div class="sl">Reminders Active</div>
+<div class="cd bb" onclick="t(this)"><div class="ch">▾</div><span class="pt i">Daily</span><div class="tt">Supersub / Community Banner Rotation</div><div class="su">Community at 4am · Supersub later · US only</div><div class="dt">Slackbot reminders firing. Community banner went on at 4am today. Swap to Supersub for peak.</div></div>
+<div class="cd bb" onclick="t(this)"><div class="ch">▾</div><span class="pt i">Daily</span><div class="tt">Live Now Ordering — Check Amplitude Dashboard</div><div class="su">Aashini set automated reminders with dashboard link</div><div class="dt">Reminders at 5pm, 6:45pm, 9pm with Amplitude link. Team should check and adjust Live Now page ordering based on active events.</div></div>
+</div>
+
+<!-- WINS -->
+<div class="X" id="p4">
+<div class="sl">This Week</div>
+<div class="wc" onclick="t(this)"><div class="wi">⚽</div><div class="wt">World Cup HP Strategy — Executing Perfectly</div><div class="ws">USA pill top performer · Team tabs rolling out · ~25M viewers for US game</div><div class="wd">Aashini's week-ahead plan with cohort-targeted tabs, daily pill rotation, and custom USA tab is executing smoothly. Shane's Dublin handover called USA pill "a nice HP performer." Michael T: "US game got like 25 million viewers."</div></div>
+<div class="wc" onclick="t(this)"><div class="wi">🏀</div><div class="wt">Knicks Win NBA Finals in 5</div><div class="ws">Ryan: "First shoutout to Mike, he called Knicks in 5!"</div><div class="wd">Clean season wrap. NBA Draft content transitioned smoothly — Top X Pick mapped same day. Big NYC energy.</div></div>
+<div class="wc" onclick="t(this)"><div class="wi">🎮</div><div class="wt">User-Created Combos — Officially Live</div><div class="ws">Dylan: "Major one for Predicts"</div><div class="wd">Users can now create their own combo bets. Monitor adoption data at Performance Review today.</div></div>
+<div class="wc" onclick="t(this)"><div class="wi">📊</div><div class="wt">Monday Trading Queue — Fully Cleared</div><div class="ws">8 requests in, 8 completed · Ryan + shift team crushed it</div><div class="wd">Stanley Cup pill restored, NBA Draft mapped, WC Novelty halftime added, WC Futures back on HP, NASCAR done, UFC ordering fixed, NHL Draft mapped, NCAA blurb removed. All in one day.</div></div>
+<div class="wc" onclick="t(this)"><div class="wi">👋</div><div class="wt">Claudia Baim — Day 2</div><div class="ws">Brainstorm sessions today (9:15am + 3pm) with leadership</div><div class="wd">Intros completed yesterday with Kim, Glen, Michael T, Chad. Your 1:1 done. Today: first working brainstorms with the team.</div></div>
+<div class="wc" onclick="t(this)"><div class="wi">🏇</div><div class="wt">Shawn Brooker — Racing Ops Transparency</div><div class="ws">Full daily checklist shared in #merchops</div><div class="wd">Tote connections, race feed review, different runners, Japan tracks, profiles, wager minimums, CDI carryovers. The team can now see exactly what Racing does every morning.</div></div>
+</div>
+
+</div>
+<div class="tbar">
+<button class="tb on" data-t="p0" onclick="sw(this)"><svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>Home</button>
+<button class="tb" data-t="p1" onclick="sw(this)"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H5v-2h7v2zm5-4H5v-2h12v2zm0-4H5V7h12v2z"/></svg>SBK</button>
+<button class="tb" data-t="p2" onclick="sw(this)"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>Week</button>
+<button class="tb" data-t="p3" onclick="sw(this)"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM9 13h6v2H9v-2zm6 4H9v2h6v-2zm-6-8h3v2H9V9z"/></svg>Tasks</button>
+<button class="tb" data-t="p4" onclick="sw(this)"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>Wins</button>
+</div>
+</div></div>
+<script>
+const P='merchops2026',L=document.getElementById('lock'),I=document.getElementById('pw');
+I.addEventListener('keydown',e=>{if(e.key==='Enter'){if(I.value===P){L.classList.add('off');sessionStorage.setItem('ma','1')}else{I.classList.add('err');I.value='';setTimeout(()=>I.classList.remove('err'),400)}}});
+if(sessionStorage.getItem('ma')==='1')L.classList.add('off');else I.focus();
+function uc(){document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:false})}uc();setInterval(uc,10000);
+document.querySelectorAll('.pl').forEach(p=>p.addEventListener('click',()=>{document.querySelectorAll('.pl').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.X').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.tb').forEach(x=>x.classList.remove('on'));p.classList.add('on');document.getElementById(p.dataset.p).classList.add('on');document.querySelectorAll('.tb').forEach(b=>{if(b.dataset.t===p.dataset.p)b.classList.add('on')});document.getElementById('cnt').scrollTop=0}));
+function sw(b){document.querySelectorAll('.tb').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.X').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.pl').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.getElementById(b.dataset.t).classList.add('on');document.querySelectorAll('.pl').forEach(p=>{if(p.dataset.p===b.dataset.t)p.classList.add('on')});document.getElementById('cnt').scrollTop=0}
+function t(c){c.classList.toggle('ex')}
+</script>
+</body></html>
