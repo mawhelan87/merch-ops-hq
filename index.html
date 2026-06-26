@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Merch Ops HQ</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+:root{--fb:#1a3260;--fb2:#1e3a6e;--fn:#0f1b33;--fd:#0c1526;--fa:#4a90d9;--t1:#fff;--t2:#8ea4c4;--t3:#5a7499;--c:#162744;--c2:#1a2f50;--b:#243a5c;--b2:#2d4a70;--r:#ef4444;--rb:rgba(239,68,68,.12);--o:#f59e0b;--ob:rgba(245,158,11,.12);--g:#22c55e;--gb:rgba(34,197,94,.12);--bl:#5ba3f5;--blb:rgba(91,163,245,.12);--p:#a78bfa;--pb:rgba(167,139,250,.12)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{height:100%;overflow:hidden;background:var(--fd);font-family:'Inter',system-ui,sans-serif;color:var(--t1)}
+#lock{position:fixed;inset:0;z-index:9999;background:linear-gradient(180deg,var(--fb),var(--fn));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .35s,transform .35s}#lock.off{opacity:0;pointer-events:none;transform:scale(1.03)}#lock .gl{width:56px;height:56px;border-radius:14px;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px;border:1px solid rgba(255,255,255,.15)}#lock h1{font-size:20px;font-weight:800}#lock p{font-size:12px;color:var(--t2);margin-top:4px;margin-bottom:24px}#lock input{width:260px;padding:14px 18px;border-radius:10px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);color:var(--t1);font-size:15px;font-family:inherit;text-align:center;outline:none}#lock input::placeholder{color:var(--t3)}#lock input:focus{border-color:var(--fa)}#lock input.err{border-color:var(--r);animation:shake .35s}#lock .sub{font-size:10px;color:var(--t3);margin-top:14px}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.frame{display:contents}@media(min-width:481px){body{display:flex;align-items:center;justify-content:center;background:#080c14}.frame{display:block;position:relative;width:390px;height:844px;border-radius:44px;border:2.5px solid #1e3050;box-shadow:0 40px 100px rgba(0,0,0,.5);overflow:hidden;background:var(--fd)}.frame::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:126px;height:33px;background:#000;border-radius:0 0 18px 18px;z-index:100}#app{position:relative;width:100%;height:100%}}
+#app{position:fixed;inset:0;background:var(--fd);overflow:hidden;display:flex;flex-direction:column}@media(min-width:481px){#app{position:relative}}
+.hdr{background:linear-gradient(180deg,var(--fb),var(--fb2));padding:max(env(safe-area-inset-top),12px) 16px 10px;flex-shrink:0}.hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.hdr-top h1{font-size:17px;font-weight:800}.hdr-top .clk{font-size:12px;color:var(--t2);font-weight:600;font-variant-numeric:tabular-nums}
+.pn{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px}.pn::-webkit-scrollbar{display:none}.pl{flex-shrink:0;padding:7px 14px;font-size:11.5px;font-weight:700;color:var(--t2);background:0;border:none;border-bottom:3px solid transparent;cursor:pointer;font-family:inherit;white-space:nowrap}.pl.on{color:#fff;border-bottom-color:var(--fa)}
+.cnt{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:12px 14px 16px;background:var(--fn)}.cnt::-webkit-scrollbar{display:none}
+.tbar{background:var(--fd);border-top:1px solid var(--b);display:flex;align-items:center;justify-content:space-around;flex-shrink:0;padding:7px 0 max(env(safe-area-inset-bottom),7px)}.tb{display:flex;flex-direction:column;align-items:center;gap:2px;background:0;border:0;color:var(--t3);cursor:pointer;font-size:9px;font-weight:600;font-family:inherit;min-width:52px}.tb svg{width:20px;height:20px;fill:currentColor}.tb.on{color:#fff}
+.X{display:none}.X.on{display:block;animation:fu .2s ease}@keyframes fu{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.hero{background:linear-gradient(135deg,var(--fb2),var(--c2));border-radius:10px;padding:12px 14px;margin-bottom:10px;border:1px solid var(--b)}.hero .hl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--fa);margin-bottom:5px}.hero .hb{font-size:11.5px;color:var(--t2);line-height:1.55}.hero b{color:var(--t1)}
+.or{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px}.ob{background:var(--c2);border:1.5px solid var(--b2);border-radius:8px;padding:10px 4px;text-align:center}.ob .ot{font-size:9px;color:var(--t2);font-weight:600}.ob .ov{font-size:20px;font-weight:800;color:var(--fa);margin-top:2px}
+.sl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--t3);margin:14px 0 7px 2px}
+.cd{background:var(--c);border-radius:10px;padding:11px 12px;border:1px solid var(--b);margin-bottom:7px;cursor:pointer;position:relative;overflow:hidden}.cd:active{transform:scale(.985)}.cd .tt{font-size:12.5px;font-weight:700;line-height:1.35}.cd .su{font-size:10.5px;color:var(--t2);margin-top:2px;line-height:1.35}.cd .dt{max-height:0;overflow:hidden;transition:max-height .28s,padding .28s;font-size:10.5px;color:var(--t2);line-height:1.6}.cd.ex .dt{max-height:900px;padding-top:8px}.cd .ch{position:absolute;right:11px;top:12px;font-size:9px;color:var(--t3);transition:transform .2s}.cd.ex .ch{transform:rotate(180deg)}
+.pt{display:inline-block;padding:2px 7px;border-radius:5px;font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-bottom:4px}.pt.u{background:var(--rb);color:var(--r)}.pt.r{background:var(--ob);color:var(--o)}.pt.g{background:var(--gb);color:var(--g)}.pt.i{background:var(--blb);color:var(--bl)}.pt.p{background:var(--pb);color:var(--p)}
+.cd.br{border-left:3px solid var(--r)}.cd.bo{border-left:3px solid var(--o)}.cd.bg{border-left:3px solid var(--g)}.cd.bb{border-left:3px solid var(--bl)}.cd.bp{border-left:3px solid var(--p)}
+.wc{background:linear-gradient(135deg,rgba(34,197,94,.05),rgba(74,144,217,.05));border-radius:10px;padding:11px 12px;border:1px solid rgba(34,197,94,.12);margin-bottom:7px;cursor:pointer}.wc:active{transform:scale(.985)}.wc .wi{font-size:14px;margin-bottom:2px}.wc .wt{font-size:12.5px;font-weight:700;margin-bottom:2px}.wc .ws{font-size:10.5px;color:var(--t2);line-height:1.35}.wc .wd{max-height:0;overflow:hidden;transition:max-height .28s;font-size:10.5px;color:var(--t2);line-height:1.6}.wc.ex .wd{max-height:500px;padding-top:8px}
+.rb{background:var(--c);border:1px solid var(--b);border-radius:8px;padding:9px 11px;margin-bottom:5px;font-size:10px;color:var(--t2);line-height:1.5}.rb .rh{color:var(--o);font-weight:800;font-size:9px;text-transform:uppercase;letter-spacing:.3px;margin-bottom:2px}
+.ck{color:var(--g)}.pd{color:var(--o)}b{color:var(--t1)}
+</style></head><body>
+<div id="lock"><div class="gl">📊</div><h1>MERCH OPS HQ</h1><p>Team Hub · Thu Jun 18, 2026</p><input type="password" id="pw" placeholder="Enter password" autocomplete="off"><div class="sub">mawhelan87.github.io</div></div>
+<div class="frame"><div id="app">
+<div class="hdr"><div class="hdr-top"><h1>MERCH OPS HQ</h1><span class="clk" id="clk">--:--</span></div>
+<div class="pn"><button class="pl on" data-p="p0">📋 Priorities</button><button class="pl" data-p="p1">📊 SBK</button><button class="pl" data-p="p2">📅 Week</button><button class="pl" data-p="p3">📋 Tasklist</button><button class="pl" data-p="p4">🌟 Wins</button></div></div>
+<div class="cnt" id="cnt">
+
+<!-- PRIORITIES -->
+<div class="X on" id="p0">
+<div class="hero"><div class="hl">🇺🇸 USA Tab Live on HP · ⛳ US Open Day 3 · ⚽ WC Week 1</div>
+<div class="hb"><b>USA + Canada custom tabs LIVE</b> — Mahima built both with custom flags this morning. HP ordering: World Cup, MLB, US Open, USA*, WNBA (US) · Canada, World Cup, MLB, US Open, WNBA (CAN). <b>US Open SGP tabs getting praise from Matt Hammond.</b> Claudia OOO Thu-Fri.</div></div>
+
+<div class="or"><div class="ob"><div class="ot">MEETINGS</div><div class="ov" style="color:var(--fa)">2</div></div><div class="ob"><div class="ot">ACTIONS</div><div class="ov" style="color:var(--o)">7</div></div><div class="ob"><div class="ov" style="color:var(--g)">5</div><div class="ot">WINS</div></div></div>
+
+<div class="sl">📅 Team Meetings</div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><div class="tt">10:00 — Homepage Sync</div><div class="su">Niall · Mahima, Darren, Aashini, Bradley, Will E, Cydney, Collin, Ryan H, Shane</div><div class="dt">USA + Canada tabs live — review performance. US Open SGP tabs feedback. WC tab ordering check. Friday plan: USA → P1 WC pill + Brazil tab.</div></div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><div class="tt">1:30 — SBK360 Bi-weekly</div><div class="su">Dhara Trivedi · Full SBK pillar · Flex agenda</div><div class="dt">Cross-pillar update. Good visibility for WC performance data, US Open engagement, user-created combos adoption. If team wants to add a topic, flag it.</div></div>
+
+<div class="sl">🔴 Act Today</div>
+<div class="cd br" onclick="t(this)"><div class="ch">▾</div><span class="pt u">Fix</span><div class="tt">Luka Doncic Photo Missing — NBA Reg Season MVP</div><div class="su">Rory Anders flagged overnight · Needs fixing today</div><div class="dt">Missing photo on next season's Reg Season MVP market. Quick Sanity fix.</div></div>
+<div class="cd br" onclick="t(this)"><div class="ch">▾</div><span class="pt u">Action</span><div class="tt">⛳ Golf Live Specials — Map for Visibility</div><div class="su">Philip Charlton · US Open live specials need mapping</div><div class="dt">US Open getting strong engagement. Matt Hammond praised HP SGP tabs. Live specials need mapping for easier customer access.</div></div>
+<div class="cd br" onclick="t(this)"><div class="ch">▾</div><span class="pt u">Action</span><div class="tt">F1 — Remove from Header</div><div class="su">Jack Navin · No race this week · Bump F1 out</div><div class="dt">No F1 race this weekend. Remove from header/prominent positioning. Austrian GP markets are mapped but race is next week.</div></div>
+
+<div class="sl">🟡 In Progress</div>
+<div class="cd bo" onclick="t(this)"><div class="ch">▾</div><span class="pt r">Live</span><div class="tt">🇺🇸 USA + 🇨🇦 Canada Custom Tabs — Tracking</div><div class="su">Mahima built both with custom flags · Using CP labels</div><div class="dt">USA tab on US HP, Canada tab on Canada HP. Mahima built from scratch with custom country flags. Offered to add banners or player carousel if needed. Tomorrow: USA → P1 pill within WC tab + Brazil tab goes live.</div></div>
+<div class="cd bo" onclick="t(this)"><div class="ch">▾</div><span class="pt r">Important</span><div class="tt">WNBA Commissioner's Cup Final — Blacklisted from Regular Tabs</div><div class="su">Zara actioned · Aces vs Liberty · June 30</div><div class="dt">Trading has the game up but requested blacklisting from regular game tabs to avoid confusion while regular season continues. Game lines in Commissioner's Cup tab only. Trading will confirm when to restore to regular tabs.</div></div>
+<div class="cd bo" onclick="t(this)"><div class="ch">▾</div><span class="pt r">5 Items</span><div class="tt">Trading Content Queue</div><div class="su">Boxing Featured, NFL Rush TDs, Austrian GP, Motorsport x2</div><div class="dt">1. Boxing: 5 featured fights (Stuart Conroy) — Olascuaga, Cruz, Pacheco, Berlanga, Hitchins<br>2. NFL: Season-long Rushing TD props x6 (Luke O'Donovan) — Judkins, Dobbins, Warren, Achane, Daniels, Willis, Nix<br>3. F1: Austrian GP market mapping (Stuart)<br>4. Motorsport: 2 event mappings (Nicholas Noye)<br>5. NASCAR: Anduril 250 tab mapping (Nicholas Noye)</div></div>
+</div>
+
+<!-- SBK -->
+<div class="X" id="p1">
+<div class="hero"><div class="hl">📊 SBK · Thu Jun 18</div>
+<div class="hb"><b>US Open SGP tabs praised.</b> Matt Hammond: "Love the home page golf SGP tabs." Asked about hole scores ordering. WC custom tabs live. Supersub banner rotation continues. Claudia OOO Thu-Fri.</div></div>
+
+<div class="sl">HP Ordering · Today</div>
+<div class="rb"><div class="rh">🇺🇸 US Homepage</div>World Cup, MLB, US Open, USA* (custom tab), WNBA</div>
+<div class="rb"><div class="rh">🇨🇦 Canada Homepage</div>Canada* (custom tab), World Cup, MLB, US Open, WNBA</div>
+<div class="rb"><div class="rh">📱 Live Now</div>Check Aashini's Amplitude dashboard for ordering</div>
+
+<div class="sl">Handovers</div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><span class="pt g">AUS · Zara</span><div class="tt">Clean · HP tabs set for Thursday · WNBA Cup handled</div><div class="su">Commissioner's Cup blacklisted · Motorsport requests actioned</div><div class="dt">"Chat on the other side of 🇺🇸 vs 🇦🇺 🏆" — Zara ready for tonight's WC. WNBA game lines in Commissioner's Cup tab only.</div></div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><span class="pt g">US · Justin P</span><div class="tt">Clean · HP good for evening</div><div class="su">Wednesday night handover</div><div class="dt">Nothing major. HP in order.</div></div>
+
+<div class="sl">Content Queue · 5 Items</div>
+<div class="cd bo" onclick="t(this)"><div class="ch">▾</div><span class="pt r">Boxing</span><div class="tt">5 Fights to Featured Tab</div><div class="su">Stuart Conroy · Olascuaga, Cruz, Pacheco, Berlanga, Hitchins</div><div class="dt">Standard Featured tab mapping. Big card.</div></div>
+<div class="cd bb" onclick="t(this)"><div class="ch">▾</div><span class="pt i">NFL</span><div class="tt">Season-Long Rushing TD Props x7</div><div class="su">Luke O'Donovan · Judkins, Dobbins, Warren, Achane, Daniels, Willis, Nix</div><div class="dt">Mapping to NFL Futures. Early season prop volume building.</div></div>
+<div class="cd bb" onclick="t(this)"><div class="ch">▾</div><span class="pt i">F1 + Motorsport</span><div class="tt">Austrian GP Markets + 2 Motorsport Events</div><div class="su">Stuart Conroy (F1) + Nicholas Noye (Motorsport x2)</div><div class="dt">Austrian GP next week — map markets now. Plus Anduril 250 tab + additional motorsport event.</div></div>
+
+<div class="sl">Golf Feedback</div>
+<div class="cd bb" onclick="t(this)"><div class="ch">▾</div><span class="pt i">Positive</span><div class="tt">US Open SGP Tabs — "Love Them"</div><div class="su">Matt Hammond · Asked about hole scores ordering</div><div class="dt">"I'm assuming there is no way to put the hole scores in any order that makes a bit more sense? Either by player or by hole number or by group?" Good product feedback — consider for future iteration.</div></div>
+</div>
+
+<!-- WEEK -->
+<div class="X" id="p2">
+<div class="hero"><div class="hl">📅 Week of Jun 15 · WC + US Open + Stanley Cup</div>
+<div class="hb"><b>Three concurrent majors.</b> WC group stage rolling. US Open Day 3. Stanley Cup Finals active. USA custom tab live today → P1 WC pill tomorrow. WNBA Commissioner's Cup Final Jun 30.</div></div>
+
+<div class="sl">Sport Priorities</div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><span class="pt g">P1</span><div class="tt">⚽ World Cup — USA Tab Live</div><div class="su">Custom tabs performing · ~25M US viewers · Group stage rolling</div><div class="dt"><b>Today:</b> USA tab on US HP, Canada tab on Canada HP. <b>Tomorrow:</b> USA → P1 pill inside WC tab + Brazil tab. Aashini's automated Amplitude ordering running daily.</div></div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><span class="pt g">Active</span><div class="tt">⛳ US Open — Day 3</div><div class="su">SGP tabs praised · Live specials need mapping · Hole scores feedback</div><div class="dt">Major championship getting strong engagement. Matt Hammond loved the SGP tabs. Philip Charlton wants live specials mapped. Pop Nav already updated by Cydney.</div></div>
+<div class="cd bg" onclick="t(this)"><div class="ch">▾</div><span class="pt g">Active</span><div class="tt">🏒 Stanley Cup Finals</div><div class="su">NHL Draft content mapped · Futures restructured</div><div class="dt">Finals ongoing. Sara Barshap's Division Winners and Presidents Trophy pills added. Draft picks mapped. Tab renamed to "2026-27 Futures."</div></div>
+<div class="cd bb" onclick="t(this)"><div class="ch">▾</div><span class="pt i">Jun 30</span><div class="tt">🏀 WNBA Commissioner's Cup Final</div><div class="su">Aces vs Liberty · Blacklisted from regular tabs · Zara handled</div><div class="dt">Game lines in Commissioner's Cup tab only. Trading to confirm when to restore to regular tabs.</div></div>
+
+<div class="sl">Tomorrow · Fri Jun 19</div>
+<div class="cd bo" onclick="t(this)"><div class="ch">▾</div><span class="pt r">HP Change</span><div class="tt">USA → P1 WC Pill + Brazil Tab Goes Live</div><div class="su">Per Aashini's plan · USA moves inside WC tab</div><div class="dt">USA custom tab rotates from standalone HP position to P1 pill within WC tab. Brazil team tab goes live on HP. Weekend plan TBD.</div></div>
+
+<div class="sl">People</div>
+<div class="cd bb" onclick="t(this)"><div class="ch">▾</div><span class="pt i">OOO</span><div class="tt">Claudia Baim — Out Thu-Fri</div><div class="su">Back Monday</div><div class="dt">Had brainstorm sessions Mon-Wed. Joined #sbk-betting-plans. Back next week.</div></div>
+</div>
+
+<!-- TASKLIST -->
+<div class="X" id="p3">
+<div class="hero"><div class="hl">📋 Shift Actions · Thu Jun 18</div>
+<div class="hb"><b>USA + Canada tabs live.</b> Mahima built both from scratch with custom flags (CP labels). Supersub banner swapped at noon. Aashini's ordering set. Justin P's Wed night handover clean. Zara's AUS handover clean.</div></div>
+
+<div class="sl">Fix Now</div>
+<div class="cd br" onclick="t(this)"><div class="ch">▾</div><span class="pt u">Quick Fix</span><div class="tt">Luka Doncic Photo — NBA MVP Market</div><div class="su">Rory Anders · Missing on Reg Season MVP 2026-27</div><div class="dt">Sanity image fix. Quick one.</div></div>
+<div class="cd br" onclick="t(this)"><div class="ch">▾</div><span class="pt u">Map</span><div class="tt">Golf Live Specials — US Open</div><div class="su">Philip Charlton · Better visibility for customers</div><div class="dt">US Open engagement is strong. Live specials mapping makes them easier to find.</div></div>
+<div class="cd br" onclick="t(this)"><div class="ch">▾</div><span class="pt u">Remove</span><div class="tt">F1 — Bump from Header</div><div class="su">Jack Navin · No race this week</div><div class="dt">No F1 event this weekend. Remove from prominent positioning.</div></div>
+
+<div class="sl">Content Queue</div>
+<div class="cd bo" onclick="t(this)"><div class="ch">▾</div><span class="pt r">5 Items</span><div class="tt">Boxing (5 fights) · NFL Rush TDs (7) · Austrian GP · Motorsport x2</div><div class="su">Stuart, Luke O'Donovan, Nicholas Noye</div><div class="dt">Priority: Boxing featured (big card), then NFL futures props, then motorsport mappings.</div></div>
+
+<div class="sl">Reminders</div>
+<div class="cd bb" onclick="t(this)"><div class="ch">▾</div><span class="pt i">Daily</span><div class="tt">Supersub / Community Rotation</div><div class="su">Supersub at ~noon · Community at 4am · US only</div><div class="dt">Fired at 11:55am today. Community swaps back at 4am.</div></div>
+<div class="cd bb" onclick="t(this)"><div class="ch">▾</div><span class="pt i">Tomorrow AM</span><div class="tt">USA → P1 WC Pill + Brazil Tab</div><div class="su">HP rotation per Aashini's plan</div><div class="dt">USA tab moves from standalone HP position to P1 pill inside WC tab. Brazil team tab goes live. Prep tonight.</div></div>
+</div>
+
+<!-- WINS -->
+<div class="X" id="p4">
+<div class="sl">This Week</div>
+<div class="wc" onclick="t(this)"><div class="wi">🇺🇸</div><div class="wt">Mahima — USA + Canada Tabs Built from Scratch</div><div class="ws">Custom country flags · CP labels · Both live this morning</div><div class="wd">Built both custom tabs from scratch with country flag icons. Offered to add banners or player carousel if needed. Clean, proactive execution from the Dublin shift.</div></div>
+<div class="wc" onclick="t(this)"><div class="wi">⛳</div><div class="wt">US Open SGP Tabs — Praised by Trading</div><div class="ws">Matt Hammond: "Love the home page golf SGP tabs"</div><div class="wd">Positive feedback from Trading. Engagement strong. Hole scores ordering question is good product feedback for future iteration.</div></div>
+<div class="wc" onclick="t(this)"><div class="wi">⚽</div><div class="wt">WC HP Strategy — Flawless Execution</div><div class="ws">Team tabs, custom tabs, automated ordering all running</div><div class="wd">Aashini's automated Amplitude ordering, Shane's carousels, Mahima's tab builds, Zara's AUS handovers — the full global ops machine running during a World Cup. This is what great looks like.</div></div>
+<div class="wc" onclick="t(this)"><div class="wi">🏀</div><div class="wt">Zara — WNBA Commissioner's Cup Handled Proactively</div><div class="ws">Blacklisted from regular tabs to avoid confusion · Trading aligned</div><div class="wd">Identified the issue, blacklisted the Jun 30 game from regular tabs, moved lines to Commissioner's Cup tab, told trading to confirm when to restore. Clean, proactive ops from AUS shift.</div></div>
+<div class="wc" onclick="t(this)"><div class="wi">🎮</div><div class="wt">Global Hackathon Live Finale — Today</div><div class="ws">FanDuel-wide from NYC · Customer Love, Faster/Safer/Cheaper, AI Leverage</div><div class="wd">Company hackathon finalists presenting live. Categories: Customer Love, Faster/Safer/Cheaper, Platform & AI Leverage. Good cross-org visibility moment.</div></div>
+</div>
+
+</div>
+<div class="tbar">
+<button class="tb on" data-t="p0" onclick="sw(this)"><svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>Home</button>
+<button class="tb" data-t="p1" onclick="sw(this)"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H5v-2h7v2zm5-4H5v-2h12v2zm0-4H5V7h12v2z"/></svg>SBK</button>
+<button class="tb" data-t="p2" onclick="sw(this)"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>Week</button>
+<button class="tb" data-t="p3" onclick="sw(this)"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM9 13h6v2H9v-2zm6 4H9v2h6v-2zm-6-8h3v2H9V9z"/></svg>Tasks</button>
+<button class="tb" data-t="p4" onclick="sw(this)"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>Wins</button>
+</div>
+</div></div>
+<script>
+const P='merchops2026',L=document.getElementById('lock'),I=document.getElementById('pw');
+I.addEventListener('keydown',e=>{if(e.key==='Enter'){if(I.value===P){L.classList.add('off');sessionStorage.setItem('ma','1')}else{I.classList.add('err');I.value='';setTimeout(()=>I.classList.remove('err'),400)}}});
+if(sessionStorage.getItem('ma')==='1')L.classList.add('off');else I.focus();
+function uc(){document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:false})}uc();setInterval(uc,10000);
+document.querySelectorAll('.pl').forEach(p=>p.addEventListener('click',()=>{document.querySelectorAll('.pl').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.X').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.tb').forEach(x=>x.classList.remove('on'));p.classList.add('on');document.getElementById(p.dataset.p).classList.add('on');document.querySelectorAll('.tb').forEach(b=>{if(b.dataset.t===p.dataset.p)b.classList.add('on')});document.getElementById('cnt').scrollTop=0}));
+function sw(b){document.querySelectorAll('.tb').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.X').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.pl').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.getElementById(b.dataset.t).classList.add('on');document.querySelectorAll('.pl').forEach(p=>{if(p.dataset.p===b.dataset.t)p.classList.add('on')});document.getElementById('cnt').scrollTop=0}
+function t(c){c.classList.toggle('ex')}
+</script>
+</body></html>
